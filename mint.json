@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "Starter Kit",
-  "openapi": "http://73.202.138.16:8000/openapi.json",
+  "openapi": ["http://73.202.138.16:8000/openapi.json"],
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
