@@ -2,6 +2,10 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "AskVideos",
   "openapi": ["http://73.202.138.16:8000/openapi.json"],
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#0D9373",
@@ -15,12 +19,12 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "info@askvideos.com"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Playground",
+    "url": "https://playground.askvideos.com"
   },
   "tabs": [
     {
@@ -92,8 +96,6 @@
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "github": "https://github.com/AskYoutubeAI/",
   }
 }
