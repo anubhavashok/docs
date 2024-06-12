@@ -1,0 +1,166 @@
+---
+title: 'Add videos'
+description: 'Lets add our first few videos to an index!'
+---
+
+## Setup
+
+To get started, we need an API key that can be obtained by creating an account at https://askvideos.com.
+
+Once that is done, the API can be accessed via:
+1. [REST API](https://yourproject.com/docs/rest-api)
+2. [Python client](https://yourproject.com/docs/python)
+
+For this tutorial, we will use the python client.
+
+```python
+import askvideos as av
+import requests
+
+API_KEY = 'YOUR_API_KEY'
+client = av.Client(API_KEY)
+```
+
+## Creating an index
+First, we will create an index to add videos to.
+```python
+index_name = "test_index_add_videos"
+client.create_index(index_name)
+```
+
+## Adding videos from a file
+
+```python
+# Path to video on local filesystem.
+video_file = '/path/to/video_file.mp4'
+
+# Optionally add transcripts in .vtt format.
+transcript_path = '/path/to/transcript.vtt'
+
+# Add metadata for this video.
+metadata = {
+    'title': 'Example video',
+    'description': 'This is an example video',
+    'info': {
+        # Add any other info here. 
+    }
+}
+
+client.index_video(index_name,
+                    video_file=video_file,
+                    transcript_path=transcript_path,
+                    metadata=metadata)
+```
+
+## Adding videos from a URL
+
+```python
+# Path to video on local filesystem.
+video_url = 'https://link.to/video.mp4'
+
+# Add metadata for this video.
+metadata = {
+    'title': 'Example video',
+    'description': 'This is an example video',
+    'info': {
+        # Add any other info here. 
+    }
+}
+
+client.index_video(index_name,
+                    video_url=video_url,
+                    metadata=metadata)
+```
+
+## Adding videos from YouTube
+AskVideos provides convenience functions to index videos from YouTube. Please comply with your local laws for use of video content.
+<AccordionGroup>
+  <Accordion icon="searchengin" title="Add from search terms">
+    ```python
+    # Find videos of 'dogs'.
+    search_term = 'dogs'
+
+    # Only use top 10 search results
+    max_videos = 10
+
+    # Only index videos shorter than 10 mins.
+    max_duration = 600 
+
+    client.index_from_youtube_search(index_name,
+                        search_term,
+                        max_videos=max_videos,
+                        max_duration=max_duration)
+    ```
+  </Accordion>
+  <Accordion icon="youtube" title="Add from url">
+    ```python
+    # Index this video from URL.
+    video_url = 'https://www.youtube.com/watch?v=video_id'
+
+    # Only use top 10 search results
+    max_videos = 10
+
+    # Only index videos shorter than 10 mins.
+    max_duration = 600 
+
+    client.index_from_youtube_url(index_name,
+                        video_url,
+                        max_videos=max_videos,
+                        max_duration=max_duration)
+    ```
+  </Accordion>
+  <Accordion icon="list" title="Add from playlist">
+    ```python
+    # Index videos from this playlist.
+    playlist_url = 'https://www.youtube.com/playlist?list=playlist_url'
+
+    # Only use top 10 search results
+    max_videos = 10
+
+    # Only index videos shorter than 10 mins.
+    max_duration = 600 
+
+    client.index_from_youtube_playlist(index_name,
+                        playlist_url,
+                        max_videos=max_videos,
+                        max_duration=max_duration)
+    ```
+  </Accordion>
+
+  <Accordion icon="tv" title="Add from channel">
+    ```python
+    # Index videos from this channel.
+    channel_url = 'https://www.youtube.com/channel/channel_id'
+
+    # Only use top 10 search results
+    max_videos = 10
+
+    # Only index videos shorter than 10 mins.
+    max_duration = 600 
+
+    client.index_from_youtube_channel(index_name,
+                        channel_url,
+                        max_videos=max_videos,
+                        max_duration=max_duration)
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+Now that the index contains a few videos, we can do some cool things with the index.
+
+<CardGroup>
+
+<Card title="Search for moments" icon="searchengin" href="/quickstart/search">
+  Search for specific moments in the video index.
+</Card>
+
+<Card
+  title="Generate answers"
+  icon="question"
+  href="/quickstart/answer"
+>
+  Ask questions and generate answers from video content
+</Card>
+</CardGroup>
