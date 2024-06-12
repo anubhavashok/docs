@@ -1,11 +1,11 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "AskVideos",
   "openapi": ["http://73.202.138.16:8000/openapi.json"],
-  "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
-  },
+  // "logo": {
+  //   "dark": "/logo/dark.svg",
+  //   "light": "/logo/light.svg"
+  // },
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#0D9373",
