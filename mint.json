@@ -49,8 +49,15 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
+        "quickstart"
+      ]
+    },
+    {
+      "group": "Quickstart",
+      "pages": [
+        "quickstart/add-videos",
+        "quickstart/search",
+        "quickstart/answer"
       ]
     },
     {
