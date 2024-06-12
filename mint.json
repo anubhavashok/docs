@@ -59,13 +59,6 @@
       ]
     },
     {
-      "group": "Essentials",
-      "pages": [
-        "essentials/navigation",
-        "essentials/reusable-snippets"
-      ]
-    },
-    {
       "group": "API Documentation",
       "pages": [
         "api-reference/introduction"
