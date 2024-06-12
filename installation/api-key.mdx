@@ -1,0 +1,54 @@
+---
+title: 'API keys'
+description: 'Obtain an API key to use AskVideos'
+---
+
+## Create an account
+First, create an account on https://www.askvideos.com/sign-up
+
+## Generate an API key
+To generate an API key, select the account icon on the top right of the page and select 'Settings'.
+
+Then, navigate to the 'API keys' section on the left sidebar.
+
+TODO: Show example
+
+## API key best practices
+We recommend the following steps to protect API keys from misuse.
+
+<AccordionGroup>
+  <Accordion icon="file" title="Use environment variables">
+  Specifying API keys in place can result in unintentional exposure of keys and could make replacement inconveninent.
+  ``` bash
+  # .env file
+  ASKVIDEOS_API_KEY='example_api_key'
+  ```
+  </Accordion>
+  <Accordion icon="clock" title="Specify a TTL">
+  We do not recommend creating API keys that never expire since it can lead to an unncesary increase and potential security vulnerablities.
+
+  To specify a Time-To-Live, navigate to the (API key)[] page and enter a value for when the key should expire.
+
+  TODO: Add example.
+  </Accordion>
+</AccordionGroup>
+
+
+## Next steps
+
+Now that we have an API key, we can do some cool things with the index.
+
+<CardGroup>
+
+<Card title="Search for moments" icon="searchengin" href="/quickstart/search">
+  Search for specific moments in the video index.
+</Card>
+
+<Card
+  title="Generate answers"
+  icon="question"
+  href="/quickstart/answer"
+>
+  Ask questions and generate answers from video content
+</Card>
+</CardGroup>

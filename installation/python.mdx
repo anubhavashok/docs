@@ -1,0 +1,33 @@
+---
+title: 'Python client'
+description: 'Lets get started with the AskVideos Python client'
+---
+
+## Installation
+
+Install from PyPi using
+```
+pip install askvideos
+```
+
+## Usage
+To use the client in your application, create a client object.
+```python
+import askvideos as av
+
+API_KEY = 'YOUR_API_KEY'
+client = av.Client(API_KEY)
+```
+
+<Tip>Follow these steps to get an API key: [API keys](/installation/api-key)</Tip>
+
+## Next steps
+Now that the Python client is setup, we can get started by populating the index with videos.
+
+<CardGroup>
+
+<Card title="Add videos" icon="play" href="/quickstart/add-videos">
+  Get started by indexing some videos.
+</Card>
+
+</CardGroup>
