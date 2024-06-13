@@ -1,0 +1,135 @@
+---
+title: 'Answer engine'
+description: 'Find exact moments across videos in the index'
+---
+
+<Note>Try out the search function on a sample index in the [Search playground]()</Note>
+
+## Setup
+
+<Steps>
+  <Step title="Create an API key">
+    First create an API key using the instructions in [API keys](/installation/api-key)
+  </Step>
+  <Step title="Install the client">
+    Next install the AskVideos client if using [Python](/installation/python). Or consult the [REST API](/installation/rest-api) reference for other frameworks.
+  </Step>
+  <Step title="Create an index">
+    Next, [create an index](/quickstart/create-index). For this tutorial, we will use an index with the name 'test_index'
+  </Step>
+
+  <Step title="Add some videos">
+    Next, [add some videos](/quickstart/add-videos) to the index. Now we are ready to get started with getting answers!
+  </Step>
+</Steps>
+
+## Answer a question
+```python
+index_name = 'test_index'
+query = 'What dog breeds are mentioned?'
+
+results = client.answer(
+            index_name,
+            query)
+```
+
+The returned results look like this:
+```json
+{
+    "6689571-hd_1280_720_25fps": [
+        {
+            "score": 0.09953739908006456,
+            "start_seconds": 0,
+            "end_seconds": 18
+        }
+    ],
+    "855386-hd_1280_720_25fps": [
+        {
+            "score": 0.10187351703643799,
+            "start_seconds": 0,
+            "end_seconds": 2
+        },
+        {
+            "score": 0.08336693048477173,
+            "start_seconds": 2,
+            "end_seconds": 6
+        },
+        {
+            "score": 0.10038037598133087,
+            "start_seconds": 6,
+            "end_seconds": 10
+        }
+    ]
+    ...
+}
+```
+
+
+## Search using an images
+```python
+index_name = 'test_index'
+image_path = '/path/to/image.jpg'
+top_k = 30 # Number of results to return.
+
+results = client.search_by_image(
+            image_path,
+            query,
+            top_k=top_k)
+```
+
+## Search using a video
+```python
+index_name = 'test_index'
+video_path = '/path/to/video.mp4'
+top_k = 30 # Number of results to return.
+
+results = client.search_by_video(
+            index_name,
+            video_path,
+            top_k=top_k)
+```
+
+## Answer modes
+### All videos
+### Specific videos
+### Retrieval Augmented Generation
+
+## System prompt
+The system prompt is customizable and can unlock powerful capabilities in the answer engine.
+Here are some examples of useful system prompts.
+<AccordionGroup>
+  <Accordion title="Cited answers">
+  ```python
+  system_prompt = '''  
+  Answer the query based on the following transcripts.
+  Also cite where the information was found, displaying the start and end timestamps.
+  Make the citation link point to /index/(index_name)/video/(video_id)/gui?start_seconds=(start_seconds)&end_seconds=(end_seconds). 
+  
+  Return the response in markdown format.
+  
+  Query: {query}
+  Transcripts:
+  {transcripts}
+'''
+
+  ```
+  <Note>Note: The strings `{query}` and `{transcripts}` have to be present in the system prompt.</Note>
+  </Accordion>
+  <Accordion title="Tabular answers">
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+In addition to finding moments, AskVideos can also answer questions based on the videos in the index.
+
+<CardGroup>
+
+<Card
+  title="Generate answers"
+  icon="question"
+  href="/quickstart/answer"
+>
+  Ask questions and generate answers from video content
+</Card>
+</CardGroup>
