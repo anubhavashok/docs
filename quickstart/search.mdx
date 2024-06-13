@@ -65,6 +65,9 @@ The returned results look like this:
     ...
 }
 ```
+Where the results are a dictionary of lists where the key of the dictionary is the `video_id` and the list items are segments of the video that are in the `top_k` results.
+
+Each segment contains a score representing how close of a match the segment is to the query and the start and end timestamps within the video.
 
 ## Search using an images
 ```python
