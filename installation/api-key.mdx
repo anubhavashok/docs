@@ -11,7 +11,10 @@ To generate an API key, select the account icon on the top right of the page and
 
 Then, navigate to the 'API keys' section on the left sidebar.
 
-TODO: Show example
+Then select "Create New Secret Key" and enter a name to generate an API key.
+
+The API key can then be shown by clicking the eye icon.
+
 
 ## API key best practices
 We recommend the following steps to protect API keys from misuse.
@@ -24,12 +27,9 @@ We recommend the following steps to protect API keys from misuse.
   ASKVIDEOS_API_KEY='example_api_key'
   ```
   </Accordion>
-  <Accordion icon="clock" title="Specify a TTL">
-  We do not recommend creating API keys that never expire since it can lead to an unncesary increase and potential security vulnerablities.
-
-  To specify a Time-To-Live, navigate to the (API key)[] page and enter a value for when the key should expire.
-
-  TODO: Add example.
+  <Accordion icon="clock" title="Delete unused keys">
+  It is good practice to rotate API keys and delete old keys to prevent unintended usage.
+  To do so, navigate to the "API keys" page and click on the trash icon to delete an API key.
   </Accordion>
 </AccordionGroup>
 
