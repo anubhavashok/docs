@@ -30,15 +30,10 @@
     {
       "name": "API Reference",
       "openapi": "/openapi.json",
-      "url": "api-reference2"
+      "url": "api-reference"
     }
   ],
   "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://docs.askvideos.com"
-    },
     {
       "name": "Support",
       "icon": "envelope",
