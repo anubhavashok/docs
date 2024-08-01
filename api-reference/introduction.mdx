@@ -1,33 +1,61 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'AskVideos API reference'
 ---
-
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
 
 ## Welcome
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+This page describes the AskVideos REST API in detail.
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+The API can be directly used as a REST API or with the [Python client](/installation/python).
+
+In addition, some functions of the API can be accessed via the [playground](http://app.askvideos.com).
+
+Feel free to explore the API endpoints on the panel on the left.
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All API endpoints are authenticated using API tokens.
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+<Tip>Follow these steps to get an API key: [API keys](/installation/api-key)</Tip>
+
+To authenticate an API call, pass the API key in the `X-API-Key` header field with each request.
+
+<CodeGroup>
+
+```cURL cURL
+curl \
+-X GET "https://api.askvideos.com/v1/endpoint" \
+-H "X-API-Key: your_api_key_value"
 ```
+
+```python python
+import requests
+
+url = "https://api.askvideos.com/v1/endpoint"
+headers = {
+    "X-API-Key": "your_api_key_value"
+}
+
+response = requests.get(url, headers=headers)
+print(response.status_code)
+print(response.json())
+```
+
+```java javascript
+const url = "https://api.askvideos.com/v1/endpoint";
+const headers = {
+    "X-API-Key": "your_api_key_value"
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+
+```
+
+</CodeGroup>
