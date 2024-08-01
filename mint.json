@@ -24,7 +24,7 @@
   ],
   "topbarCtaButton": {
     "name": "Playground",
-    "url": "https://playground.askvideos.com"
+    "url": "https://app.askvideos.com"
   },
   "tabs": [
     {
@@ -36,7 +36,7 @@
     {
       "name": "Documentation",
       "icon": "book-open-cover",
-      "url": "https://askvideos.com/docs"
+      "url": "https://docs.askvideos.com"
     },
     {
       "name": "Support",
