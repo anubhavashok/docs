@@ -60,25 +60,6 @@
       "pages": [
         "api-reference/introduction"
       ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-          "list-indices",
-          "create-index",
-          "search-videos",
-          "search-by-image",
-          "search-by-video",
-          "search-by-video-text",
-          "answer-query-from-videos",
-          "answer-query-from-videos-1",
-          "index-from-youtube-search",
-          "index-from-youtube-url",
-          "index-from-youtube-playlist",
-          "index-from-youtube-channel",
-          "index-video",
-          "list-videos"
-      ]
     }
   ],
   "feedback": {
