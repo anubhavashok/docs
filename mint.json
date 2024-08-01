@@ -29,6 +29,7 @@
   "tabs": [
     {
       "name": "API Reference",
+      "openapi": "http://209.237.157.153:8888/openapi.json",
       "url": "api-reference"
     }
   ],
