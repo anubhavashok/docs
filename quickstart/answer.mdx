@@ -35,9 +35,46 @@ results = client.answer(
 
 
 ## Answer modes
-### All videos
+
 ### Specific videos
-### Retrieval Augmented Generation
+Instead of using all the videos in the index, you can also specify the video_ids variable to limit the videos used in synthesizing the answer.
+
+```python
+video_ids = ['video_id1', 'video_id2', 'video_id3']
+
+results = client.answer(
+            index_name,
+            video_ids=video_ids,
+            query)
+```
+
+### Retrieval Augmented Generation (RAG)
+AskVideos also supports RAG to synthesize answers from the video.
+
+Using embeddings to find the relevant parts of the video before generating tokens helps to reduce cost and provide more accurate answers. In addition, if the text in the index exceeds the input token limit, RAG can help overcome this limitation by selecting only the most relevant parts for the context.
+
+In order to specify RAG mode, simply update the mode variable as follows.
+
+```python
+results = client.answer(
+            index_name,
+            mode='rag',
+            query)
+```
+
+If you need to limit the videos to perform RAG over, you can also specify the video_ids variable as follows.
+
+```python
+video_ids = ['video_id1', 'video_id2', 'video_id3']
+
+results = client.answer(
+            index_name,
+            mode='rag',
+            video_ids=video_ids,
+            query)
+```
+
+
 
 ## System prompt
 The system prompt is customizable and can unlock powerful capabilities in the answer engine.
