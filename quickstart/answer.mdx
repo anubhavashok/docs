@@ -44,8 +44,8 @@ video_ids = ['video_id1', 'video_id2', 'video_id3']
 
 results = client.answer(
             index_name,
-            video_ids=video_ids,
-            query)
+            query,
+            video_ids=video_ids)
 ```
 
 ### Retrieval Augmented Generation (RAG)
@@ -58,8 +58,8 @@ In order to specify RAG mode, simply update the mode variable as follows.
 ```python
 results = client.answer(
             index_name,
-            mode='rag',
-            query)
+            query,
+            mode='rag')
 ```
 
 If you need to limit the videos to perform RAG over, you can also specify the video_ids variable as follows.
@@ -69,9 +69,9 @@ video_ids = ['video_id1', 'video_id2', 'video_id3']
 
 results = client.answer(
             index_name,
+            query,
             mode='rag',
-            video_ids=video_ids,
-            query)
+            video_ids=video_ids)
 ```
 
 
@@ -112,6 +112,18 @@ Here are some examples of useful system prompts.
 
   </Accordion>
 </AccordionGroup>
+  In order to utilize a custom system prompt with the query, do the following:
+
+  ```python
+  system_prompt = '''
+  Your custom system prompt
+  '''
+  
+  results = client.answer(
+              index_name,
+              query,
+              system_prompt=system_prompt)
+  ```
 
 ## Next steps
 
