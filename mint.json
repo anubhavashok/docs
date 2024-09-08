@@ -65,8 +65,5 @@
   "feedback": {
     "suggestEdit": true,
     "raiseIssue": true
-  },
-  "footerSocials": {
-    "github": "https://github.com/AskYoutubeAI/"
   }
 }
