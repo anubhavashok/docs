@@ -98,6 +98,18 @@ Here are some examples of useful system prompts.
   <Note>Note: The strings `{query}` and `{transcripts}` have to be present in the system prompt.</Note>
   </Accordion>
   <Accordion title="Tabular answers">
+    ```python
+  system_prompt = '''  
+  Answer the query based on the following transcripts.
+  Display the answer as a markdown table.
+  
+  Query: {query}
+  Transcripts:
+  {transcripts}
+'''
+  ```
+  <Note>Note: The strings `{query}` and `{transcripts}` have to be present in the system prompt.</Note>
+
   </Accordion>
 </AccordionGroup>
 
