@@ -1,0 +1,185 @@
+---
+title: 'Lets explore a movie'
+description: 'Find scenes in a movie and generate answers to questions'
+---
+
+## Setup
+
+<Steps>
+  <Step title="Create an API key">
+    First create an API key using the instructions in [API keys](/installation/api-key)
+  </Step>
+  <Step title="Install the client">
+    Next install the AskVideos client if using [Python](/installation/python). Or consult the [REST API](/api-reference/introduction) reference for other frameworks.
+  </Step>
+  <Step title="Create an index">
+    Next, [create an index](/quickstart/add-videos#creating-an-index). For this tutorial, we will use an index with the name 'test_index'
+  </Step>
+</Steps>
+
+In this tutorial, we will go through an example of how to index a movie and search through it. We will explore searching via text, images and video. We will also explore how to use the answer engine to generate answers to our questions based on the contents of the movie.
+
+To keep things simple, this example uses a single video in the index. However, the power of AskVideos scales to any number of videos in the index. That is, you can search through and get answers from multiple videos at once.
+
+Let's get right into it. For this example, I'll be using the movie [No Country For Old Men](https://en.wikipedia.org/wiki/No_Country_for_Old_Men) as an example.
+
+## Indexing the movie
+The first step is to create an index to store and process the movie.
+
+```python
+index_name = 'movie_example'
+
+# Create an index
+client.create_index(index_name)
+```
+
+Cool, we should now have an empty index that we can add the movie to.
+
+```python
+
+# Create an index
+movie_file = 'no_country_for_old_men.mp4'
+
+results = client.index(
+            index_name,
+            movie_file)
+```
+<Note>Replace `movie_file` with the absolute path to the movie you want to index on your disk.</Note>
+
+If you already have a transcript .vtt file, we can also add it while indexing. You may also add additional metadata.
+
+```python
+
+# Create an index
+movie_file = 'no_country_for_old_men.mp4'
+transcript_path = 'no_country_for_old_men.vtt'
+metadata = {
+  'title': "No Country For Old Men",
+  'description': "A classic thriller set in the deserts of Texas",
+  'info': {}
+}
+
+results = client.index(
+            index_name,
+            movie_file,
+            transcript_path=transcript_path)
+```
+
+If you navigate to your dashboard at [app.askvideos.com](https://app.askvideos.com), you should now see that the index has been created. If you click on the index name, you should also see that the video has been created.
+
+<Note>It may take a while for the video to be uploaded to the server so do check after a while if it doesn't appear initially.</Note>
+
+## Finding scenes
+### Using text
+One of the cool things you can do with AskVideos is search through the visual content of the video with text.
+
+For example if we wanted to find all the scenes where someone's wearing a <b>cowboy hat</b> (it is set in Texas after all!), we could enter that as the query to the search API.
+
+TODO: Insert find by text example
+
+### Using images
+
+
+### Using videos
+
+## Answer modes
+
+### Specific videos
+Instead of using all the videos in the index, you can also specify the video_ids variable to limit the videos used in synthesizing the answer.
+
+```python
+video_ids = ['video_id1', 'video_id2', 'video_id3']
+
+results = client.answer(
+            index_name,
+            query,
+            video_ids=video_ids)
+```
+
+### Retrieval Augmented Generation (RAG)
+AskVideos also supports RAG to synthesize answers from the video.
+
+Using embeddings to find the relevant parts of the video before generating tokens helps to reduce cost and provide more accurate answers. In addition, if the text in the index exceeds the input token limit, RAG can help overcome this limitation by selecting only the most relevant parts for the context.
+
+In order to specify RAG mode, simply update the mode variable as follows.
+
+```python
+results = client.answer(
+            index_name,
+            query,
+            mode='rag')
+```
+
+If you need to limit the videos to perform RAG over, you can also specify the video_ids variable as follows.
+
+```python
+video_ids = ['video_id1', 'video_id2', 'video_id3']
+
+results = client.answer(
+            index_name,
+            query,
+            mode='rag',
+            video_ids=video_ids)
+```
+
+
+
+## System prompt
+The system prompt is customizable and can unlock powerful capabilities in the answer engine.
+Here are some examples of useful system prompts.
+<AccordionGroup>
+  <Accordion title="Cited answers">
+  ```python
+  system_prompt = '''  
+  Answer the query based on the following transcripts.
+  Also cite where the information was found, displaying the start and end timestamps.
+  Make the citation link point to /index/(index_name)/video/(video_id)/gui?start_seconds=(start_seconds)&end_seconds=(end_seconds). 
+  
+  Return the response in markdown format.
+  
+  Query: {query}
+  Transcripts:
+  {transcripts}
+'''
+
+  ```
+  <Note>Note: The strings `{query}` and `{transcripts}` have to be present in the system prompt.</Note>
+  </Accordion>
+  <Accordion title="Tabular answers">
+    ```python
+  system_prompt = '''  
+  Answer the query based on the following transcripts.
+  Display the answer as a markdown table.
+  
+  Query: {query}
+  Transcripts:
+  {transcripts}
+'''
+  ```
+  <Note>Note: The strings `{query}` and `{transcripts}` have to be present in the system prompt.</Note>
+
+  </Accordion>
+</AccordionGroup>
+  In order to utilize a custom system prompt with the query, do the following:
+
+  ```python
+  system_prompt = '''
+  Your custom system prompt
+  '''
+  
+  results = client.answer(
+              index_name,
+              query,
+              system_prompt=system_prompt)
+  ```
+
+## Next steps
+
+In addition to answering questions, the AskVideos API can also find specific moments in the videos.
+
+<CardGroup>
+
+<Card title="Search for moments" icon="searchengin" href="/quickstart/search">
+  Search for specific moments in the video index.
+</Card>
+</CardGroup>
