@@ -30,12 +30,17 @@ The first step is to create an index to store and process the movie.
 index_name = 'movie_example'
 
 # Create an index
-client.create_index(index_name)
+results = client.create_index(index_name)
+print(results)
+'''
+{'index_name': 'movie_example', 'success': True}
+'''
 
 # List all available indexes
 results = client.list_indices()
-print(reuslts)
+print(results)
 '''
+{'indices': ["movie_example"]}
 '''
 
 ```
@@ -98,6 +103,7 @@ search_term = 'cowboy hats'
 
 results = client.search(
             index_name,
+            search_term,
             top_k=10)
 print(results)
 '''
@@ -171,12 +177,9 @@ Here, we have two addition variables `start_seconds` and `end_seconds` that spec
 We can also use the power of language models in the AskVideos API to do various tasks ask questions and synthesize answers from our videos or 'chat' with a video.
 
 ```python
-video_ids = ['video_id1', 'video_id2', 'video_id3']
-
 results = client.answer(
             index_name,
-            query,
-            video_ids=video_ids)
+            query)
 ```
 
 
