@@ -31,18 +31,30 @@ index_name = 'movie_example'
 
 # Create an index
 client.create_index(index_name)
+
+# List all available indexes
+results = client.list_indices()
+print(reuslts)
+'''
+'''
+
 ```
 
 Cool, we should now have an empty index that we can add the movie to.
 
 ```python
 
-# Create an index
+# Index a video
 movie_file = 'no_country_for_old_men.mp4'
 
 results = client.index(
             index_name,
             movie_file)
+
+print(results)
+'''
+'''
+
 ```
 <Note>Replace `movie_file` with the absolute path to the movie you want to index on your disk.</Note>
 
@@ -50,7 +62,7 @@ If you already have a transcript .vtt file, we can also add it while indexing. Y
 
 ```python
 
-# Create an index
+# Index a video
 movie_file = 'no_country_for_old_men.mp4'
 transcript_path = 'no_country_for_old_men.vtt'
 metadata = {
@@ -63,6 +75,10 @@ results = client.index(
             index_name,
             movie_file,
             transcript_path=transcript_path)
+
+print(results)
+'''
+'''
 ```
 
 If you navigate to your dashboard at [app.askvideos.com](https://app.askvideos.com), you should now see that the index has been created. If you click on the index name, you should also see that the video has been created.
@@ -75,17 +91,84 @@ One of the cool things you can do with AskVideos is search through the visual co
 
 For example if we wanted to find all the scenes where someone's wearing a <b>cowboy hat</b> (it is set in Texas after all!), we could enter that as the query to the search API.
 
-TODO: Insert find by text example
+```python
+
+# Find scenes with cowboy hats
+search_term = 'cowboy hats'
+
+results = client.search(
+            index_name,
+            top_k=10)
+print(results)
+'''
+'''
+
+```
+
+We should see that it has returned 10 results since we specified `top_k` to be 10.
+
+Each result has an associated confidence score along with start and end timestamps.
+
+Here are what the results look like:
+TODO: Insert results from browser
 
 ### Using images
+Now let's try using an image to search!
+
+Images can be powerful search queries when we are trying to describe a vibe or particular scene with a lot of things happening in it. 
+
+Let's try to find a specific scene that is shown in the trailer using an image.
+
+TODO: Insert image
+
+```python
+
+# Find scenes with an image
+image_path = 'img.jpg'
+
+results = client.search_by_image(
+            index_name,
+            image_path=image_path,
+            top_k=10)
+print(results)
+'''
+'''
+
+```
+
+As before, the result is a list of highest scoring sections of the movie.
+
+TODO: Insert results from browser
+
+This scene occurs at 01:30:00 of the movie - case closed!
 
 
 ### Using videos
+If we have a video we would like to use as our search query, we can do that too!
 
-## Answer modes
+```python
 
-### Specific videos
-Instead of using all the videos in the index, you can also specify the video_ids variable to limit the videos used in synthesizing the answer.
+# Find scenes with an video
+video_path = 'video.mp4'
+
+results = client.search_by_video(
+            index_name,
+            video_path=video_path,
+            start_seconds=10,
+            end_seconds=14,
+            top_k=10)
+print(results)
+'''
+'''
+
+```
+Here, we have two addition variables `start_seconds` and `end_seconds` that specify which segment of the query video to use for the search. Note that these variables relate to the video we are using as our query and not the other videos that are in the index.
+
+
+
+## Answer Engine
+
+We can also use the power of language models in the AskVideos API to do various tasks ask questions and synthesize answers from our videos or 'chat' with a video.
 
 ```python
 video_ids = ['video_id1', 'video_id2', 'video_id3']
@@ -96,90 +179,18 @@ results = client.answer(
             video_ids=video_ids)
 ```
 
-### Retrieval Augmented Generation (RAG)
-AskVideos also supports RAG to synthesize answers from the video.
-
-Using embeddings to find the relevant parts of the video before generating tokens helps to reduce cost and provide more accurate answers. In addition, if the text in the index exceeds the input token limit, RAG can help overcome this limitation by selecting only the most relevant parts for the context.
-
-In order to specify RAG mode, simply update the mode variable as follows.
-
-```python
-results = client.answer(
-            index_name,
-            query,
-            mode='rag')
-```
-
-If you need to limit the videos to perform RAG over, you can also specify the video_ids variable as follows.
-
-```python
-video_ids = ['video_id1', 'video_id2', 'video_id3']
-
-results = client.answer(
-            index_name,
-            query,
-            mode='rag',
-            video_ids=video_ids)
-```
-
-
-
-## System prompt
-The system prompt is customizable and can unlock powerful capabilities in the answer engine.
-Here are some examples of useful system prompts.
-<AccordionGroup>
-  <Accordion title="Cited answers">
-  ```python
-  system_prompt = '''  
-  Answer the query based on the following transcripts.
-  Also cite where the information was found, displaying the start and end timestamps.
-  Make the citation link point to /index/(index_name)/video/(video_id)/gui?start_seconds=(start_seconds)&end_seconds=(end_seconds). 
-  
-  Return the response in markdown format.
-  
-  Query: {query}
-  Transcripts:
-  {transcripts}
-'''
-
-  ```
-  <Note>Note: The strings `{query}` and `{transcripts}` have to be present in the system prompt.</Note>
-  </Accordion>
-  <Accordion title="Tabular answers">
-    ```python
-  system_prompt = '''  
-  Answer the query based on the following transcripts.
-  Display the answer as a markdown table.
-  
-  Query: {query}
-  Transcripts:
-  {transcripts}
-'''
-  ```
-  <Note>Note: The strings `{query}` and `{transcripts}` have to be present in the system prompt.</Note>
-
-  </Accordion>
-</AccordionGroup>
-  In order to utilize a custom system prompt with the query, do the following:
-
-  ```python
-  system_prompt = '''
-  Your custom system prompt
-  '''
-  
-  results = client.answer(
-              index_name,
-              query,
-              system_prompt=system_prompt)
-  ```
 
 ## Next steps
 
-In addition to answering questions, the AskVideos API can also find specific moments in the videos.
+Check out our other examples or dive deeper into the api
 
 <CardGroup>
 
 <Card title="Search for moments" icon="searchengin" href="/quickstart/search">
   Search for specific moments in the video index.
 </Card>
+<Card title="Search for moments" icon="searchengin" href="/quickstart/search">
+  Search for specific moments in the video index.
+</Card>
+
 </CardGroup>
