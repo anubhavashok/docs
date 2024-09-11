@@ -23,6 +23,8 @@ To keep things simple, this example uses a single video in the index. However, t
 
 Let's get right into it. For this example, I'll be using the movie [No Country For Old Men](https://en.wikipedia.org/wiki/No_Country_for_Old_Men) as an example.
 
+<img height="200" src="/examples/movie/poster.jpg" />
+
 ## Indexing the movie
 The first step is to create an index to store and process the movie.
 
@@ -116,7 +118,8 @@ We should see that it has returned 10 results since we specified `top_k` to be 1
 Each result has an associated confidence score along with start and end timestamps.
 
 Here are what the results look like:
-TODO: Insert results from browser
+
+<img height="200" src="/examples/movie/text_query_results.jpg" />
 
 ### Using images
 Now let's try using an image to search!
@@ -125,7 +128,7 @@ Images can be powerful search queries when we are trying to describe a vibe or p
 
 Let's try to find a specific scene that is shown in the trailer using an image.
 
-TODO: Insert image
+<img height="200" src="/examples/movie/image_query.jpg" />
 
 ```python
 
@@ -144,9 +147,9 @@ print(results)
 
 As before, the result is a list of highest scoring sections of the movie.
 
-TODO: Insert results from browser
+<img height="200" src="/examples/movie/image_query_results.jpg" />
 
-This scene occurs at 01:30:00 of the movie - case closed!
+This scene occurs at 22:30 of the movie - case closed!
 
 
 ### Using videos
@@ -169,6 +172,12 @@ print(results)
 
 ```
 Here, we have two addition variables `start_seconds` and `end_seconds` that specify which segment of the query video to use for the search. Note that these variables relate to the video we are using as our query and not the other videos that are in the index.
+
+<img height="200" src="/examples/movie/video_query.gif" />
+
+The results of the search again show the scene we were looking for!
+
+<img height="200" src="/examples/movie/video_query_results.jpg" />
 
 
 
