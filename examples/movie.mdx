@@ -183,13 +183,21 @@ The results of the search again show the scene we were looking for!
 
 ## Answer Engine
 
-We can also use the power of language models in the AskVideos API to do various tasks ask questions and synthesize answers from our videos or 'chat' with a video.
+We can also use language models in the AskVideos API to do various tasks ask questions and synthesize answers from our videos or 'chat' with a video.
 
 ```python
+query = '''
+Which city does Llewelyn tell Carla Jean to go to?
+'''
+
 results = client.answer(
             index_name,
             query)
 ```
+
+Here's an example where the API answers a question about the movie and provides a precise timestamp to where the information is contained.
+
+<img height="200" src="/examples/images/answer.jpg" />
 
 
 ## Next steps
