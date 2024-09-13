@@ -44,6 +44,19 @@ TODO: Show video of just food
 ## Finding specific food
 Now suppose we have a craving for a specific kind of food, let's say some noodles, we can search for that instead. 
 
+As food names get more specific or complex, the task of identifying food becomes harder. However since the AskVideos API can do image or video queries, we can leverage that instead to identify the food that we want.
+
+TODO: Example of food from menu image
+
 ## What we don't want
 Sometimes, these videos have text on them or contain footage of people talking. We can remove those by adding a negative query.
+
+## Automating this process
+We can perform this task end to end for a given menu with a few processing steps:
+1. Parse menu and identify food categories
+2. Search for food categories
+3. Use menu images to match food item to video segment
+4. (Extra) Use validated videos to find more segments
+
+TODO: Show results
 
