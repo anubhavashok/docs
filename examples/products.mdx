@@ -20,3 +20,25 @@ description: 'Finding food in Instagram posts'
 In this tutorial, we will index instagram videos from a restaurant and video clips that contain food that is on the menu! We will explore searching via text, images and video. 
 
 ## Indexing videos from instagram
+TODO: Load a particular channel
+```python
+index_name = 'instagram_example_index'
+channel_name = 'vallatable'
+client.index_from_instagram(index_name, channel_name, num_videos=10)
+```
+
+## Finding food
+A typical social media video for a restaurant includes B-roll of food interspersed with various promotional content including text.
+
+TODO: Include GIF example of regular video
+
+We don't care about those things because we're hungry. We only want the find the parts that have food in them. So for our first query, we'll just search for 'food'.
+
+```python
+query = 'food'
+results = client.search_videos(index_name, food)
+```
+
+TODO: Show video of just food
+
+
