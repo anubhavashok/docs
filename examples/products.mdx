@@ -20,7 +20,6 @@ description: 'Finding food in Instagram posts'
 In this tutorial, we will index instagram videos from a restaurant and video clips that contain food that is on the menu! We will explore searching via text, images and video. 
 
 ## Indexing videos from instagram
-TODO: Load a particular channel
 ```python
 index_name = 'instagram_example_index'
 channel_name = 'vallatable'
@@ -42,14 +41,49 @@ results = client.search_videos(index_name, food)
 TODO: Show video of just food
 
 ## Finding specific food
-Now suppose we have a craving for a specific kind of food, let's say some noodles, we can search for that instead. 
+Now suppose we have a craving for a specific kind of food, let's say some noodles, we can search for that instead.
+```python
+query = 'noodles'
+results = client.search_videos(index_name, food)
+```
+TODO: Show video of just food
 
 As food names get more specific or complex, the task of identifying food becomes harder. However since the AskVideos API can do image or video queries, we can leverage that instead to identify the food that we want.
 
-TODO: Example of food from menu image
+In this example, we have a dish called "Pak Mor Cashew". 
+
+Let's see if we can find the right parts of the video given this image.
+
+```python
+
+image_path = '/path/to/pak_mor_cashew.jpg'
+
+results = client.search_by_image(
+            index_name,
+            image_path=image_path,
+            top_k=10)
+
+```
+
+TODO: Show results
 
 ## What we don't want
 Sometimes, these videos have text on them or contain footage of people talking. We can remove those by adding a negative query.
+
+This is simple to do with the AskVideos query spec. Simply provide a comma separated list with '-' in front of the negative queries e.g.
+
+```python
+# Search for noodles but no people
+query = 'noodles,-people'
+results = client.search_videos(index_name, food)
+```
+
+#TODO: Show results
+
+
+
+#TODO: Show tagging app in AskVideos
+
 
 ## Automating this process
 We can perform this task end to end for a given menu with a few processing steps:
