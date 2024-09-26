@@ -29,7 +29,7 @@ client.index_from_instagram(index_name, channel_name, num_videos=10)
 ## Finding food
 A typical social media video for a restaurant includes B-roll of food interspersed with various promotional content including text.
 
-TODO: Include GIF example of regular video
+<img height="200" src="/examples/images/reg_video.gif" />
 
 We don't care about those things because we're hungry. We only want the find the parts that have food in them. So for our first query, we'll just search for 'food'.
 
@@ -37,8 +37,8 @@ We don't care about those things because we're hungry. We only want the find the
 query = 'food'
 results = client.search_videos(index_name, food)
 ```
+<img height="200" src="/examples/images/food.gif" />
 
-TODO: Show video of just food
 
 ## Finding specific food
 Now suppose we have a craving for a specific kind of food, let's say some noodles, we can search for that instead.
@@ -46,7 +46,7 @@ Now suppose we have a craving for a specific kind of food, let's say some noodle
 query = 'noodles'
 results = client.search_videos(index_name, food)
 ```
-TODO: Show video of just food
+<img height="200" src="/examples/images/noodles.gif" />
 
 As food names get more specific or complex, the task of identifying food becomes harder. However since the AskVideos API can do image or video queries, we can leverage that instead to identify the food that we want.
 
@@ -65,7 +65,7 @@ results = client.search_by_image(
 
 ```
 
-TODO: Show results
+<img height="200" src="/examples/images/pak_mor_result.gif" />
 
 ## What we don't want
 Sometimes, these videos have text on them or contain footage of people talking. We can remove those by adding a negative query.
@@ -74,23 +74,14 @@ This is simple to do with the AskVideos query spec. Simply provide a comma separ
 
 ```python
 # Search for noodles but no people
-query = 'noodles,-people'
+query = 'noodles,-person'
 results = client.search_videos(index_name, food)
 ```
 
-#TODO: Show results
+<img height="200" src="/examples/images/noodles_no_person.gif" />
+
+## Building an app
+With these building blocks, we can build a simple but powerful application to tag items in videos!
 
 
-
-#TODO: Show tagging app in AskVideos
-
-
-## Automating this process
-We can perform this task end to end for a given menu with a few processing steps:
-1. Parse menu and identify food categories
-2. Search for food categories
-3. Use menu images to match food item to video segment
-4. (Extra) Use validated videos to find more segments
-
-TODO: Show results
-
+<img height="200" src="/examples/images/products_app.gif" />
